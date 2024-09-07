@@ -77,7 +77,7 @@ export const usePaginator = <T>(data: Paginator<T> | PaginatorMeta) => {
 
   const last = {
     ...items[items.length - 1],
-    isActive: items[items.length - 1].url !== current?.url,
+    isActive: meta.current_page < meta.last_page,
     label: "&raquo;",
   };
 
