@@ -36,7 +36,7 @@ export interface PaginatorMeta {
   links?: PaginatorLink[];
 }
 
-export const usePaginator = <T>(data: Paginator<T> | PaginatorMeta) => {
+export const usePaginator = <T>(data: Paginator<T> | PaginatorMeta, limit: 10) => {
   const meta = (data as Paginator<T>).meta ?? (data as PaginatorMeta);
 
   const links = (meta.links ?? data.links!).map((link) => {
@@ -46,7 +46,7 @@ export const usePaginator = <T>(data: Paginator<T> | PaginatorMeta) => {
     };
   });
 
-  const items = links.map((link, index) => {
+  const items = links.slice(0, limit).map((link, index) => {
     return {
       url: link.url,
       label: link.label,
